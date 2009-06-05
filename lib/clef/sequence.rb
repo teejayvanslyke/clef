@@ -10,6 +10,11 @@ module Clef
       map {|note| note + rhs}
     end
 
+    def -(rhs)
+      map {|note| note - rhs}
+    end
+
+
   end
 
 end

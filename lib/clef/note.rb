@@ -16,6 +16,10 @@ module Clef
       Clef::Note.from_i(to_i + rhs)
     end
 
+    def -(rhs)
+      Clef::Note.from_i(to_i - rhs)
+    end
+
     def self.from_i(integer)
       key = %w(C- C# D- D# E- F- F# G- G# A- A# B-)[integer % 12]
       octave = (integer / 12).to_i

@@ -5,9 +5,23 @@ grammar Clef
   end
 
   rule transposition
-    sequence space* '+' space* integer {
+    sequence space* additive_operator space* integer {
       def evaluate(env)
-        sequence.evaluate(env) + integer.text_value.to_i
+        additive_operator.apply(sequence.evaluate(env), integer.text_value.to_i)
+      end
+    }
+  end
+
+  rule additive_operator
+    '+' {
+      def apply(a, b)
+        a + b
+      end
+    }
+    / 
+    '-' {
+      def apply(a, b)
+        a - b
       end
     }
   end
