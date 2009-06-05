@@ -10,6 +10,12 @@ grammar Clef
         additive_operator.apply(sequence.evaluate(env), integer.text_value.to_i)
       end
     }
+    /
+    integer space* additive_operator space* sequence {
+      def evaluate(env)
+        additive_operator.apply(sequence.evaluate(env), integer.text_value.to_i)
+      end
+    }
   end
 
   rule additive_operator
@@ -51,7 +57,7 @@ grammar Clef
   end
 
   rule integer
-    [0-9]+
+    '-'? [0-9]+
   end
 
   rule octave

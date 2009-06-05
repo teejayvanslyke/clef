@@ -48,34 +48,76 @@ describe Clef do
 
   describe '- When transposing (+) a sequence of notes' do
 
-    def do_evaluate
-      Clef.evaluate('(C-4 C#4) + 12')
+    describe 'from the left-hand side' do
+
+      def do_evaluate
+        Clef.evaluate('(C-4 C#4) + 12')
+      end
+
+      it 'should have the same number of elements as the original' do
+        do_evaluate.size.should == 2
+      end
+
+      it 'should transpose the notes by the modifier' do
+        do_evaluate[0].should == 'C-5'
+        do_evaluate[1].should == 'C#5'
+      end
+
     end
 
-    it 'should have the same number of elements as the original' do
-      do_evaluate.size.should == 2
-    end
+    describe 'from the right-hand side' do
 
-    it 'should transpose the notes by the modifier' do
-      do_evaluate[0].should == 'C-5'
-      do_evaluate[1].should == 'C#5'
+      def do_evaluate
+        Clef.evaluate('12 + (C-4 C#4)')
+      end
+
+      it 'should have the same number of elements as the original' do
+        do_evaluate.size.should == 2
+      end
+
+      it 'should transpose the notes by the modifier' do
+        do_evaluate[0].should == 'C-5'
+        do_evaluate[1].should == 'C#5'
+      end
+
     end
 
   end
 
   describe '- When transposing (-) a sequence of notes' do
 
-    def do_evaluate
-      Clef.evaluate('(C-4 C#4) - 2')
+    describe 'from the left-hand side' do
+
+      def do_evaluate
+        Clef.evaluate('(C-4 C#4) - 2')
+      end
+
+      it 'should have the same number of elements as the original' do
+        do_evaluate.size.should == 2
+      end
+
+      it 'should transpose the notes by the modifier' do
+        do_evaluate[0].should == 'A#3'
+        do_evaluate[1].should == 'B-3'
+      end
+      
     end
 
-    it 'should have the same number of elements as the original' do
-      do_evaluate.size.should == 2
-    end
+    describe 'from the right-hand side' do
 
-    it 'should transpose the notes by the modifier' do
-      do_evaluate[0].should == 'A#3'
-      do_evaluate[1].should == 'B-3'
+      def do_evaluate
+        Clef.evaluate('-2 + (C-4 C#4)')
+      end
+
+      it 'should have the same number of elements as the original' do
+        do_evaluate.size.should == 2
+      end
+
+      it 'should transpose the notes by the modifier' do
+        do_evaluate[0].should == 'A#3'
+        do_evaluate[1].should == 'B-3'
+      end
+      
     end
 
   end
