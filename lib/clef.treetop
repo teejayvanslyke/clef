@@ -1,0 +1,86 @@
+grammar Clef
+  
+  rule expression
+    transposition / sequence
+  end
+
+  rule transposition
+    sequence space* '+' space* integer {
+      def evaluate(env)
+        sequence.evaluate(env) + integer.text_value.to_i
+      end
+    }
+  end
+
+  rule sequence
+    '(' notes ')' {
+      def evaluate(env)
+        Clef::Sequence.new(notes.evaluate(env))
+      end
+    }
+  end
+
+  rule key
+    [A-Ga-g] { 
+      def evaluate(env)
+        text_value
+      end
+    }
+  end
+
+  rule accent
+    ('-' / '#') {
+      def evaluate(env)
+        text_value
+      end
+    }
+  end
+
+  rule integer
+    [0-9]+
+  end
+
+  rule octave
+    [0-9] {
+      def evaluate(env)
+        text_value.to_i
+      end
+    }
+  end
+
+  rule note
+    key accent octave {
+      def evaluate(env)
+        Clef::Note.new(
+          key.evaluate(env), 
+          accent.evaluate(env), 
+          octave.evaluate(env))
+      end
+    }
+    /
+    rest
+  end
+
+  rule rest
+    '_'+ {
+      def evaluate(env)
+        Clef::Rest.new
+      end
+    }
+  end
+
+  rule notes
+    note space notes { 
+      def evaluate(env)
+        [ note.evaluate(env), notes.evaluate(env) ].flatten
+      end
+    }
+    /
+    note
+  end
+
+  rule space
+    ' '
+  end
+
+end
