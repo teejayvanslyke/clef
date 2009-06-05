@@ -14,6 +14,9 @@ module Clef
       map {|note| note - rhs}
     end
 
+    def to_s
+      "(#{map {|n| n.to_s}.join(' ')})"
+    end
 
   end
 

@@ -122,4 +122,32 @@ describe Clef do
 
   end
 
+  describe '- When repeating (*) a sequence of notes' do
+
+    describe 'from the left-hand side' do
+
+      def do_evaluate
+        Clef.evaluate('(C-4 __) * 4')
+      end
+
+      it 'should be a repeated sequence of notes' do
+        do_evaluate.to_s.should == '(C-4 ___ C-4 ___ C-4 ___ C-4 ___)'
+      end
+
+    end
+
+    describe 'from the right-hand side' do
+
+      def do_evaluate
+        Clef.evaluate('2 * (C-4 __)')
+      end
+
+      it 'should be a repeated sequence of notes' do
+        do_evaluate.to_s.should == '(C-4 ___ C-4 ___)'
+      end
+
+    end
+
+  end
+
 end

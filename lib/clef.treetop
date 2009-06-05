@@ -1,7 +1,21 @@
 grammar Clef
   
   rule expression
-    transposition / sequence
+    transposition / repetition / sequence
+  end
+
+  rule repetition
+    sequence space* '*' space* integer {
+      def evaluate(env)
+        sequence.evaluate(env) * integer.text_value.to_i
+      end
+    }
+    /
+    integer space* '*' space* sequence {
+      def evaluate(env)
+        sequence.evaluate(env) * integer.text_value.to_i
+      end
+    }
   end
 
   rule transposition
