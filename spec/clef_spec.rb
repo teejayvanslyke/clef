@@ -150,4 +150,20 @@ describe Clef do
 
   end
 
+  describe '- When rest-padding (/) a sequence of notes' do
+
+    describe 'from the left-hand side' do
+
+      def do_evaluate
+        Clef.evaluate('(C-4) / 4')
+      end
+
+      it 'should insert the appropriate number of rests' do
+        do_evaluate.to_s.should == '(C-4 ___ ___ ___)'
+      end
+
+    end
+
+  end
+
 end
