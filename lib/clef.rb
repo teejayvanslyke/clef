@@ -10,9 +10,11 @@ require 'andand'
 
 Treetop.load File.dirname(__FILE__) + '/clef'
 
+require 'clef/utils'
 require 'clef/note'
 require 'clef/rest'
 require 'clef/sequence'
+require 'clef/matrix'
 
 module Clef
 

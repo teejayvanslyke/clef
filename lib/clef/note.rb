@@ -34,6 +34,10 @@ module Clef
       @accent == '#'
     end
 
+    def <=>(rhs)
+      self.to_i <=> rhs.to_i
+    end
+
     def ==(rhs)
       if rhs === Note
         to_s == rhs.to_s

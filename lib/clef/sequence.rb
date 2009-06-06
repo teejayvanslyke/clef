@@ -11,6 +11,10 @@ module Clef
       map {|note| note + rhs}
     end
 
+    def &(rhs)
+      Matrix.new([self, rhs])
+    end
+
     def -(rhs)
       map {|note| note - rhs}
     end
@@ -25,7 +29,7 @@ module Clef
     end
 
     def to_s
-      "(#{map {|n| n.to_s}.join(' ')})"
+      "[#{map {|n| n.to_s}.join(' ')}]"
     end
 
   end

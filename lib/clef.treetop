@@ -1,7 +1,15 @@
 grammar Clef
   
   rule expression
-    transposition / repetition / padding / sequence
+    transposition / repetition / padding / union / sequence
+  end
+
+  rule union
+    operand1:sequence space* '&' space* operand2:sequence {
+      def evaluate(env)
+        operand1.evaluate(env) & operand2.evaluate(env)
+      end
+    }
   end
 
   rule repetition
@@ -55,7 +63,7 @@ grammar Clef
   end
 
   rule sequence
-    '(' notes ')' {
+    '[' notes ']' {
       def evaluate(env)
         Clef::Sequence.new(notes.evaluate(env))
       end

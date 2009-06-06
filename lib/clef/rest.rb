@@ -9,6 +9,10 @@ module Clef
       '___'
     end
 
+    def to_i
+      -1
+    end
+
   end
 
 end

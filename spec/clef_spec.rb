@@ -5,7 +5,7 @@ describe Clef do
   describe '- When evaluating a sequence of notes' do
     
     def do_evaluate
-      Clef.evaluate('(C-4 C#4 D-4 E-4)')
+      Clef.evaluate('[C-4 C#4 D-4 E-4]')
     end
 
     it 'should return a Sequence instance' do
@@ -27,7 +27,7 @@ describe Clef do
   describe '- When evaluating a sequence of notes with rests' do
     
     def do_evaluate
-      Clef.evaluate('(C-4 C#4 ___ D-4 E-4)')
+      Clef.evaluate('[C-4 C#4 ___ D-4 E-4]')
     end
 
     it 'should have five elements' do
@@ -51,7 +51,7 @@ describe Clef do
     describe 'from the left-hand side' do
 
       def do_evaluate
-        Clef.evaluate('(C-4 C#4) + 12')
+        Clef.evaluate('[C-4 C#4] + 12')
       end
 
       it 'should have the same number of elements as the original' do
@@ -68,7 +68,7 @@ describe Clef do
     describe 'from the right-hand side' do
 
       def do_evaluate
-        Clef.evaluate('12 + (C-4 C#4)')
+        Clef.evaluate('12 + [C-4 C#4]')
       end
 
       it 'should have the same number of elements as the original' do
@@ -89,7 +89,7 @@ describe Clef do
     describe 'from the left-hand side' do
 
       def do_evaluate
-        Clef.evaluate('(C-4 C#4) - 2')
+        Clef.evaluate('[C-4 C#4] - 2')
       end
 
       it 'should have the same number of elements as the original' do
@@ -106,7 +106,7 @@ describe Clef do
     describe 'from the right-hand side' do
 
       def do_evaluate
-        Clef.evaluate('-2 + (C-4 C#4)')
+        Clef.evaluate('-2 + [C-4 C#4]')
       end
 
       it 'should have the same number of elements as the original' do
@@ -127,11 +127,11 @@ describe Clef do
     describe 'from the left-hand side' do
 
       def do_evaluate
-        Clef.evaluate('(C-4 __) * 4')
+        Clef.evaluate('[C-4 __] * 4')
       end
 
       it 'should be a repeated sequence of notes' do
-        do_evaluate.to_s.should == '(C-4 ___ C-4 ___ C-4 ___ C-4 ___)'
+        do_evaluate.to_s.should == '[C-4 ___ C-4 ___ C-4 ___ C-4 ___]'
       end
 
     end
@@ -139,11 +139,11 @@ describe Clef do
     describe 'from the right-hand side' do
 
       def do_evaluate
-        Clef.evaluate('2 * (C-4 __)')
+        Clef.evaluate('2 * [C-4 __]')
       end
 
       it 'should be a repeated sequence of notes' do
-        do_evaluate.to_s.should == '(C-4 ___ C-4 ___)'
+        do_evaluate.to_s.should == '[C-4 ___ C-4 ___]'
       end
 
     end
@@ -154,14 +154,45 @@ describe Clef do
 
     describe 'from the left-hand side' do
 
-      def do_evaluate
-        Clef.evaluate('(C-4) / 4')
-      end
-
       it 'should insert the appropriate number of rests' do
-        do_evaluate.to_s.should == '(C-4 ___ ___ ___)'
+        Clef.evaluate('[C-4] / 4').to_s.should == '[C-4 ___ ___ ___]'
+        Clef.evaluate('[C-4 ___] / 4').to_s.should == '[C-4 ___ ___ ___ ___ ___ ___ ___]'
+        Clef.evaluate('[C-4 ___ C#4 ___ C-4 ___] / 4').to_s.should ==
+          '[C-4 ___ ___ ___ ___ ___ ___ ___ C#4 ___ ___ ___ ___ ___ ___ ___ C-4 ___ ___ ___ ___ ___ ___ ___]'
       end
 
+    end
+
+  end
+
+  describe '- When combining two sequences into a matrix' do
+
+    def do_evaluate
+      Clef.evaluate('[C-4] & [C#4]')
+    end
+
+    it 'should be a matrix instance' do
+      do_evaluate.should be_instance_of(Clef::Matrix)
+    end
+
+    it 'should have a length of 1' do
+      do_evaluate.length.should == 1
+    end
+
+    it 'should render a string representation' do
+      do_evaluate.to_s.should == '[(C-4 C#4)]'
+    end
+
+  end
+
+  describe '- When combining two complex sequences into a matrix' do
+
+    def do_evaluate
+      Clef.evaluate('[C-4 D-4 E-4] & [C-5 D-5 ___]')
+    end
+
+    it 'should combine appropriately' do
+      do_evaluate.to_s.should == '[(C-4 C-5) (D-4 D-5) (___ E-4)]'
     end
 
   end
