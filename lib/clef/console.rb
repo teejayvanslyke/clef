@@ -12,18 +12,26 @@ module Clef
       puts "\n"
 
       loop do
-        line = Readline::readline('$>> ')
+        begin
+          line = Readline::readline('$>> ')
 
-        Readline::HISTORY.push(line)
+          if line.nil?
+            puts "\nExiting..."
+            exit
+          end
 
-        result = Clef.evaluate(line)
+          Readline::HISTORY.push(line)
 
-        if result.nil?
-          puts "Clef didn't understand '#{line}'."
-        else
-          puts "=> #{result.to_s}"
+          result = Clef.evaluate(line)
+
+          if result.nil?
+            puts "Clef didn't understand '#{line}': #{Clef.last_failure}"
+          else
+            puts "=> #{result.to_s}"
+          end
+        rescue => e
+          puts "There was a system error:  #{e}"
         end
-
       end
 
     end

@@ -32,6 +32,10 @@ module Clef
     self.parse(expr).andand.evaluate(self.environment)
   end
 
+  def self.last_failure
+    @parser.failure_reason
+  end
+
   def self.environment
     @environment ||= Clef::Environment.new
   end
