@@ -63,7 +63,15 @@ grammar Clef
   end
 
   rule primary
-    sequence / integer
+    sequence 
+    / 
+    integer
+    /
+    '(' space expression space ')' { 
+      def evaluate(env)
+        expression.evaluate(env)
+      end
+    }
   end
 
   rule sequence

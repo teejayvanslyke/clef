@@ -13,7 +13,6 @@ module Clef
           notes << e
         end
       end
-      puts notes.inspect
 
       super(notes.compact.uniq)
     end
