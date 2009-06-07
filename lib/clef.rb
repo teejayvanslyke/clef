@@ -17,7 +17,8 @@ require 'clef/note'
 require 'clef/rest'
 require 'clef/harmony'
 require 'clef/sequence'
-require 'clef/matrix'
+require 'clef/environment'
+require 'clef/channel'
 require 'clef/console'
 
 module Clef
@@ -28,7 +29,11 @@ module Clef
   end
 
   def self.evaluate(expr)
-    self.parse(expr).andand.evaluate(nil)
+    self.parse(expr).andand.evaluate(self.environment)
+  end
+
+  def self.environment
+    @environment ||= Clef::Environment.new
   end
 
 end

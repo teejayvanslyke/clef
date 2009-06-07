@@ -215,4 +215,13 @@ describe Clef do
 
   end
 
+  describe '- When assigning sequences to channels' do
+
+    it 'should behave just like a sequence' do
+      Clef.evaluate('@1 = [C-3 D-3 E-3]')
+      Clef.evaluate('@1').to_s.should == '[C-3 D-3 E-3]'
+    end
+
+  end
+
 end

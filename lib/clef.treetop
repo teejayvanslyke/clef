@@ -1,7 +1,21 @@
 grammar Clef
+
+  rule statement
+    assignment / expression
+  end
   
   rule expression
     additive
+  end
+
+  rule assignment
+    channel 
+    space '=' space
+    expression {
+      def evaluate(env)
+        channel.evaluate(env).play(expression.evaluate(env))
+      end
+    }
   end
 
   rule additive
@@ -66,6 +80,8 @@ grammar Clef
     sequence 
     / 
     integer
+    /
+    channel
     /
     '(' space expression space ')' { 
       def evaluate(env)
@@ -165,6 +181,18 @@ grammar Clef
     }
     /
     playable
+  end
+
+  rule channel_number
+    '0' / '1' / '2' / '3' / '4' / '5' / '6' / '7' / '8' / '9' / '10' / '11' / '12' / '13' / '14' / '15'
+  end
+
+  rule channel
+    '@' channel_number {
+      def evaluate(env)
+        env.channel(channel_number.text_value.to_i)
+      end
+    }
   end
 
   rule space
