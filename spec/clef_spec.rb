@@ -203,6 +203,10 @@ describe Clef do
       Clef.evaluate('[C-3 D-3] + 12 & [C-4]').to_s.should == '[(C-4) (D-4)]'
     end
 
+    it 'should parse chained unions' do
+      Clef.evaluate('[C-3] & [E-3] & [G-3]').to_s.should == '[(C-3 E-3 G-3)]'
+    end
+
   end
 
 end

@@ -2,6 +2,8 @@ module Clef
 
   class Sequence < Array
 
+    include Clef::Utils
+
     def initialize(elements)
       elements = [ elements ] unless elements.is_a?(Array)
       super(elements)
@@ -12,7 +14,9 @@ module Clef
     end
 
     def &(rhs)
-      Matrix.new([self, rhs])
+      sequences = [ self, rhs ] 
+      sequences = rotate_matrix(sequences, :right)
+      Sequence.new(sequences.map {|row| Harmony.new(row)})
     end
 
     def -(rhs)

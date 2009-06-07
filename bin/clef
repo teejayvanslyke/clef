@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require File.dirname(__FILE__) + '/../lib/clef'
+
+#DRb.start_service
+Clef::Console.new.run
+#DRb.stop_service

@@ -7,6 +7,7 @@ module Clef
     include Clef::Utils
 
     def initialize(sequences)
+      p sequences
       return unless sequences.is_a?(Array) && sequences.size > 0
       rotate_matrix(sequences, :right)
       map! {|row| row.compact.uniq }

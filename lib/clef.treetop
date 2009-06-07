@@ -1,59 +1,19 @@
 grammar Clef
   
   rule expression
-    matrix_expression / sequence_expression
+    additive
   end
 
-  rule matrix_expression
-    union
-  end
-
-  rule sequence_expression
-    transposition / repetition / padding / sequence
-  end
-
-  rule union
-    operand1:sequence_expression space* '&' space* operand2:sequence_expression {
+  rule additive
+    operand1:multitive
+    space operator:additive_operator space
+    operand2:additive {
       def evaluate(env)
-        operand1.evaluate(env) & operand2.evaluate(env)
-      end
-    }
-  end
-
-  rule repetition
-    sequence space* '*' space* integer {
-      def evaluate(env)
-        sequence.evaluate(env) * integer.text_value.to_i
+        operator.apply(operand1.evaluate(env), operand2.evaluate(env))
       end
     }
     /
-    integer space* '*' space* sequence {
-      def evaluate(env)
-        sequence.evaluate(env) * integer.text_value.to_i
-      end
-    }
-  end
-
-  rule padding
-    sequence space* '/' space* integer {
-      def evaluate(env)
-        sequence.evaluate(env) / integer.text_value.to_i
-      end
-    }
-  end
-
-  rule transposition
-    sequence space* additive_operator space* integer {
-      def evaluate(env)
-        additive_operator.apply(sequence.evaluate(env), integer.text_value.to_i)
-      end
-    }
-    /
-    integer space* additive_operator space* sequence {
-      def evaluate(env)
-        additive_operator.apply(sequence.evaluate(env), integer.text_value.to_i)
-      end
-    }
+    multitive
   end
 
   rule additive_operator
@@ -68,6 +28,42 @@ grammar Clef
         a - b
       end
     }
+  end
+
+  rule multitive
+    operand1:primary
+    space operator:multitive_operator space
+    operand2:multitive {
+      def evaluate(env)
+        operator.apply(operand1.evaluate(env), operand2.evaluate(env))
+      end
+    }
+    /
+    primary
+  end
+
+  rule multitive_operator
+    '*' {
+      def apply(a, b)
+        a * b
+      end
+    }
+    /
+    '/' {
+      def apply(a, b)
+        a / b
+      end
+    }
+    /
+    '&' {
+      def apply(a, b)
+        a & b
+      end
+    }
+  end
+
+  rule primary
+    sequence / integer
   end
 
   rule sequence
@@ -95,7 +91,11 @@ grammar Clef
   end
 
   rule integer
-    '-'? [0-9]+
+    '-'? [0-9]+ {
+      def evaluate(env)
+        text_value.to_i
+      end
+    }
   end
 
   rule octave
@@ -138,7 +138,7 @@ grammar Clef
   end
 
   rule space
-    ' '
+    ' '*
   end
 
 end
