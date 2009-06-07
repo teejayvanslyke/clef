@@ -21,6 +21,14 @@ module Clef
       "(#{sort.map {|n| n.to_s}.join(' ')})"
     end
 
+    def +(rhs)
+      if rhs.is_a?(Fixnum)
+        Harmony.new(map {|n| n + rhs})
+      else 
+        super(rhs)
+      end
+    end
+
   end
 
 end

@@ -122,6 +122,12 @@ describe Clef do
 
   end
 
+  describe '- When transposing a sequence of notes with rests' do
+    it 'should leave the rests alone' do
+      Clef.evaluate('[C-3 ___] + 12').to_s.should == '[C-4 ___]'
+    end
+  end
+
   describe '- When repeating (*) a sequence of notes' do
 
     describe 'from the left-hand side' do
@@ -201,6 +207,10 @@ describe Clef do
 
     it 'should parse chained unions' do
       Clef.evaluate('[C-3] & [E-3] & [G-3]').to_s.should == '[(C-3 E-3 G-3)]'
+    end
+
+    it 'should allow transposing unions' do
+      Clef.evaluate('[C-3] & [E-3] & [G-3] + 12').to_s.should == '[(C-4 E-4 G-4)]'
     end
 
   end

@@ -13,6 +13,14 @@ module Clef
       -1
     end
 
+    def +(rhs)
+      self
+    end
+
+    def -(rhs)
+      self
+    end
+
   end
 
 end
