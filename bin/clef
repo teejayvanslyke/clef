@@ -2,6 +2,6 @@
 
 require File.dirname(__FILE__) + '/../lib/clef'
 
-#DRb.start_service
+DRb.start_service
 Clef::Console.new.run
-#DRb.stop_service
+DRb.stop_service

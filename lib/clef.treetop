@@ -13,7 +13,7 @@ grammar Clef
     space '=' space
     expression {
       def evaluate(env)
-        channel.evaluate(env).play(expression.evaluate(env))
+        env.play(channel.evaluate(env).to_i, expression.evaluate(env))
       end
     }
   end
@@ -190,7 +190,7 @@ grammar Clef
   rule channel
     '@' channel_number {
       def evaluate(env)
-        env.channel(channel_number.text_value.to_i)
+        env.channels[channel_number.text_value.to_i]
       end
     }
   end

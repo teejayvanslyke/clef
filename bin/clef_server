@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require File.dirname(__FILE__) + '/../lib/clef'
+
+environment = Clef::Environment.new
+
+puts "Starting Clef server..."
+DRb.start_service('druby://localhost:12345', environment)
+puts "Listening at #{DRb.uri}."
+
+environment.run
+
+DRb.thread.join
+

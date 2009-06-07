@@ -8,6 +8,10 @@ require 'treetop'
 gem     'andand'
 require 'andand'
 
+require 'midiator'
+require 'gamelan'
+require 'drb'
+
 Treetop.load File.dirname(__FILE__) + '/clef'
 
 require 'core_ext/fixnum'
@@ -37,7 +41,7 @@ module Clef
   end
 
   def self.environment
-    @environment ||= Clef::Environment.new
+    DRbObject.new(nil, 'druby://localhost:12345')
   end
 
 end
