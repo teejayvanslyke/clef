@@ -8,7 +8,7 @@ module Clef
     end
 
     def +(rhs)
-      map {|note| note + rhs}
+      Sequence.new(map {|note| note + rhs})
     end
 
     def &(rhs)
@@ -16,7 +16,7 @@ module Clef
     end
 
     def -(rhs)
-      map {|note| note - rhs}
+      Sequence.new(map {|note| note - rhs})
     end
 
     def /(rhs)

@@ -2,6 +2,8 @@ module Clef
 
   class Note
 
+    NOTES = %w(C- C# D- D# E- F- F# G- G# A- A# B-)
+
     attr_reader :octave
 
     def initialize(key, accent, octave)
@@ -21,13 +23,13 @@ module Clef
     end
 
     def self.from_i(integer)
-      key = %w(C- C# D- D# E- F- F# G- G# A- A# B-)[integer % 12]
+      key = NOTES[integer % 12]
       octave = (integer / 12).to_i
       new(key[0..0], key[1..1], octave)
     end
 
     def to_i
-      %w(C D E F G A B).index(@key.upcase) + (sharp? ? 1 : 0) + (octave * 12)
+      NOTES.index("#{@key.upcase}#{@accent}") + (octave * 12)
     end
 
     def sharp?

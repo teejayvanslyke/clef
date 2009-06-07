@@ -1,11 +1,19 @@
 grammar Clef
   
   rule expression
-    transposition / repetition / padding / union / sequence
+    matrix_expression / sequence_expression
+  end
+
+  rule matrix_expression
+    union
+  end
+
+  rule sequence_expression
+    transposition / repetition / padding / sequence
   end
 
   rule union
-    operand1:sequence space* '&' space* operand2:sequence {
+    operand1:sequence_expression space* '&' space* operand2:sequence_expression {
       def evaluate(env)
         operand1.evaluate(env) & operand2.evaluate(env)
       end

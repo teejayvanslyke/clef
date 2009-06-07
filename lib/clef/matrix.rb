@@ -1,3 +1,5 @@
+require 'set'
+
 module Clef
 
   class Matrix < Array
@@ -7,6 +9,7 @@ module Clef
     def initialize(sequences)
       return unless sequences.is_a?(Array) && sequences.size > 0
       rotate_matrix(sequences, :right)
+      map! {|row| row.compact.uniq }
     end
 
     def to_s
