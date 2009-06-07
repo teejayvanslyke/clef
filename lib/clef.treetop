@@ -75,9 +75,9 @@ grammar Clef
   end
 
   rule sequence
-    '[' notes ']' {
+    '[' playables ']' {
       def evaluate(env)
-        Clef::Sequence.new(notes.evaluate(env))
+        Clef::Sequence.new(playables.evaluate(env))
       end
     }
   end
@@ -127,6 +127,16 @@ grammar Clef
     rest
   end
 
+  rule notes 
+    note space notes {
+      def evaluate(env)
+        [ note.evaluate(env), notes.evaluate(env) ].flatten
+      end
+    }
+    /
+    note
+  end
+
   rule rest
     '_'+ {
       def evaluate(env)
@@ -135,14 +145,26 @@ grammar Clef
     }
   end
 
-  rule notes
-    note space notes { 
+  rule harmony 
+    '(' space notes space ')' {
       def evaluate(env)
-        [ note.evaluate(env), notes.evaluate(env) ].flatten
+        Harmony.new(notes.evaluate(env))
+      end
+    }
+  end
+
+  rule playable
+    note / harmony
+  end
+
+  rule playables
+    playable space playables {
+      def evaluate(env)
+        [ playable.evaluate(env), playables.evaluate(env) ].flatten
       end
     }
     /
-    note
+    playable
   end
 
   rule space

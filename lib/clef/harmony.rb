@@ -18,7 +18,11 @@ module Clef
     end
 
     def to_s
-      "(#{sort.map {|n| n.to_s}.join(' ')})"
+      if size == 1
+        map {|n| n.to_s}.join(' ')
+      else
+        "(#{sort.map {|n| n.to_s}.join(' ')})"
+      end
     end
 
     def +(rhs)

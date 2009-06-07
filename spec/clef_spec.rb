@@ -202,7 +202,7 @@ describe Clef do
   describe '- When parsing complex expressions' do
 
     it 'should parse transposed sequences' do
-      Clef.evaluate('([C-3 D-3] + 12) & [C-4]').to_s.should == '[(C-4) (D-4)]'
+      Clef.evaluate('([C-3 D-3] + 12) & [C-4]').to_s.should == '[C-4 D-4]'
     end
 
     it 'should parse chained unions' do
