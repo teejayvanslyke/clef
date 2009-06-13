@@ -41,12 +41,24 @@ by the regular expression +[A-Ga-g][\-\#][0-9]+, but that's gosh darned confusin
 
 There are no flats in Clef.  Who needs 'em?  
 
+There are, however _rests_.  Rests are an important concept in Clef; as you'll see in a moment, Clef 
+doesn't understand note duration ... yet.  So, in order to play notes at a specific meter, use 
+rests appropriately:
+
+    $>> [C-4 ___]
+    => [C-4 ___]
+
+A rest is denoted by one or more consecutive underscore in a sequence.  Clef 
+will adjust your sloppiness to three underscores after evaluating your input.
+
+== Mr Teejay's Opus
+
 A note alone is boring.  That's why Clef's main unit of operation is the _sequence_.  Sequences are 
 strings of notes -- it's like a party!
 
     [E-4 D-4 C-4 D-4 C-4 C-4 C-4]
 
-Sequences are surrounded by square brackets (+[]+) with notes delimited by spaces.
+Sequences are surrounded by square brackets ( +[]+ ) with notes delimited by spaces.
 
 But not everyone plays the flute.  It'd be swell if we could live in _harmony_!  
 That's what _arrangements_ are for!
@@ -56,6 +68,66 @@ That's what _arrangements_ are for!
 _Arrangements_ are sequences in which multiple notes are played simultaneously.  
 
 How exciting!
+
+== TEH THREE R'S!
+
+Music is mathematical.  That's why there are only two Beatles left.  One?  I lost count.
+
+Clef is able to manipulate your arrangements using common household binary operators:
+
+  $>> [ C-4 ] + 2
+  => [D-4]
+
+  $>> [ C-4 ] & [ E-4 ] & [ G-4 ]
+  => [(C-4 E-4 G-4)]
+
+  $>> [ C-4 ] * 2
+  => [C-4 C-4]
+
+  $>> [ C-4 ] / 2
+  => [C-4 ___]
+
+Wowzas!
+
+== Come on Bring The Noise
+
+Music is so lame if you can't hear it.  There was a brief movement toward 
+_silence art_ in the late eighteenth century, but that's likely a discussion 
+for another README*.  Its failure is why we decided it would be prudent to allow
+you to hear your creations.
+
+* Not true
+
+Clef uses the sexy Ruby MIDI library Midiator to conduct its MIDI business.  
+If Clef isn't outputting sound, check your devices.  It's probably user error.  
+Or, it might be my fault.
+
+=== ANYWAY
+
+Clef allows manipulation of MIDI channels as objects.  These objects are named 
++@0 - @15+ .  They're also semantically identical to arrangements as described 
+above.  That means that
+
+    $>> @0 = [ C-4 D-4 E-4 ]
+    => [C-4 D-4 E-4]
+
+will start playing the sequence +[C-4 D-4 E-4]+ on MIDI channel 1 (us 'puter 
+programmers start counting at 0).
+
+Likewise,
+
+    $>> @1 = [(C-4 E-4 G-4)]
+    => [(C-4 E-4 G-4)]
+
+will play a C major chord on channel 2.
+
+== Oh snap!  It's experimental?!
+
+Yup, I fooled you.  That's all I've implemented so far.  If you're totally 
+stoked about Clef, you can contribute in one or two of two ways:
+
+*ONE:*  Play with it and report issues!
+*TWO:*  Contact me with pull requests of your _totally stellar_ features!
 
 == Special Thanks!
 
