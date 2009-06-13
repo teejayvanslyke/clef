@@ -121,6 +121,26 @@ Likewise,
 
 will play a C major chord on channel 2.
 
+== Building complex projects
+
+Clef's include system smells a bit like Python.  Clef will look for files in your
+current working directory with the extension <tt>.clef</tt>:
+
+    -- Include jazz.clef
+
+    $>> include jazz
+    => Loaded <jazz>
+
+    -- Include jazz/scales.clef
+
+    $>> include jazz.scales
+    => Loaded <jazz.scales>
+
+    -- Include jazz/scales/pentatonic.clef
+
+    $>> include jazz.scales.pentatonic
+    => Loaded <jazz.scales.pentatonic
+
 == Oh snap!  It's experimental?!
 
 Yup, I fooled you.  That's all I've implemented so far.  If you're totally 
