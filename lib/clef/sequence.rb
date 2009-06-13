@@ -32,6 +32,10 @@ module Clef
       Sequence.new(result)
     end
 
+    def call(function)
+      function.execute(self)
+    end
+
     def to_s
       "[#{map {|n| n.to_s}.join(' ')}]"
     end

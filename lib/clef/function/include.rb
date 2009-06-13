@@ -1,8 +1,8 @@
 module Clef
 
-  module Command
+  module Function
 
-    class IncludeCommand
+    class Include
 
       def execute(*args)
         if args.empty?

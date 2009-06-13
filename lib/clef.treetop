@@ -1,20 +1,23 @@
 grammar Clef
 
   rule statement
-    command / assignment / expression
+    function / assignment / expression
   end
 
-  rule command
+  rule function
     keyword space arguments {
       def evaluate(env)
-        command = Clef::Command::Base.parse(keyword.text_value)
-        command.execute(*arguments.evaluate(env))
+        keyword.evaluate(env).execute(*arguments.evaluate(env))
       end
     }
   end
 
   rule keyword
-    'include'
+    ('include' / 'reverse') {
+      def evaluate(env) 
+        Clef::Function::Base.parse(text_value)
+      end
+    }
   end
 
   rule argument
@@ -111,6 +114,12 @@ grammar Clef
         a & b
       end
     }
+    /
+    '->' {
+      def apply(a, b)
+        a.call(b)
+      end
+    }
   end
 
   rule primary
@@ -125,6 +134,8 @@ grammar Clef
         expression.evaluate(env)
       end
     }
+    /
+    keyword
   end
 
   rule sequence

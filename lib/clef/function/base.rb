@@ -1,11 +1,11 @@
 module Clef
 
-  module Command
+  module Function
 
     class Base
 
       def self.parse(keyword)
-        eval("Clef::Command::#{keyword.capitalize}Command").new
+        eval("Clef::Function::#{keyword.capitalize}").new
       end
 
       def execute(*args)
