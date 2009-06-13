@@ -1,9 +1,46 @@
 grammar Clef
 
   rule statement
-    assignment / expression
+    command / assignment / expression
   end
-  
+
+  rule command
+    keyword space arguments {
+      def evaluate(env)
+        command = Clef::Command::Base.parse(keyword.text_value)
+        command.execute(*arguments.evaluate(env))
+      end
+    }
+  end
+
+  rule keyword
+    'include'
+  end
+
+  rule argument
+    [a-z\.]+ {
+      def evaluate(env)
+        text_value
+      end
+    }
+  end
+
+  rule arguments
+    argument space arguments {
+      def evaluate(env)
+        [ argument.evaluate(env), arguments.evaluate(env) ]. flatten
+      end
+    }
+    /
+    argument
+    /
+    '' {
+      def evaluate(env)
+        []
+      end
+    }
+  end
+
   rule expression
     additive
   end

@@ -3,11 +3,7 @@ require 'spec_helper'
 describe Clef do
 
   before :each do
-    @environment = mock(Clef::Environment)
-    @environment.stub!(:channels).and_return({})
-    @environment.stub!(:play)
-
-    Clef.stub!(:environment).and_return(@environment)
+    Clef.stub!(:environment).and_return(Clef::Environment.new)
   end
 
   describe '- When parsing' do
@@ -237,11 +233,21 @@ describe Clef do
   describe '- When assigning sequences to channels' do
 
     it 'should behave just like a sequence' do
-      pending
       Clef.evaluate('@1 = [C-3 D-3 E-3]')
       Clef.evaluate('@1').to_s.should == '[C-3 D-3 E-3]'
     end
 
+  end
+
+  describe '- When including source files' do
+    it 'should parse the include command' do
+      Clef.evaluate('include examples.mary').should == 'Loaded <examples.mary>'
+    end
+
+    it 'should include the given source file within the environment' do
+      Clef.evaluate('include examples.mary')
+      Clef.evaluate('@1').to_s.should == '[E-4 D-4 C-4 D-4 E-4 E-4 E-4]'
+    end
   end
 
 end
