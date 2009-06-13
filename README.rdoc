@@ -19,6 +19,13 @@ in one terminal window, and
 
 in another!  
 
+
+== Special Thanks!
+
+* Jeremy Voorhis wrote a mean Ruby scheduler called Gamelan[http://github.com/jvoorhis/gamelan/].
+* Ben Bleything wrote a stellar cross-platform Ruby MIDI library called Midiator[http://github.com/bleything/midiator/]
+* Jeremy Voorhis also gave me a tour of his music.rb[http://github.com/jvoorhis/music.rb/] project, by which Clef was inspired.
+
 == Copyright
 
 Copyright (c) 2009 teejayvanslyke. See LICENSE for details.
