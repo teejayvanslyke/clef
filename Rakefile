@@ -9,6 +9,10 @@ begin
     gem.email = "tj@elctech.com"
     gem.homepage = "http://github.com/teejayvanslyke/clef"
     gem.authors = ["teejayvanslyke"]
+    gem.add_dependency('gamelan')
+    gem.add_dependency('midiator')
+    gem.add_dependency('treetop')
+    gem.add_dependency('andand')
 
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
