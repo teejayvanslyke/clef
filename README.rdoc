@@ -58,7 +58,7 @@ strings of notes -- it's like a party!
 
     [E-4 D-4 C-4 D-4 C-4 C-4 C-4]
 
-Sequences are surrounded by square brackets ( +[]+ ) with notes delimited by spaces.
+Sequences are surrounded by square brackets ([]) with notes delimited by spaces.
 
 But not everyone plays the flute.  It'd be swell if we could live in _harmony_!  
 That's what _arrangements_ are for!
@@ -93,10 +93,10 @@ Wowzas!
 
 Music is so lame if you can't hear it.  There was a brief movement toward 
 _silence art_ in the late eighteenth century, but that's likely a discussion 
-for another README*.  Its failure is why we decided it would be prudent to allow
+for another README§.  Its failure is why we decided it would be prudent to allow
 you to hear your creations.
 
-* Not true
+§ Not true
 
 Clef uses the sexy Ruby MIDI library Midiator to conduct its MIDI business.  
 If Clef isn't outputting sound, check your devices.  It's probably user error.  
@@ -111,7 +111,7 @@ above.  That means that
     $>> @0 = [ C-4 D-4 E-4 ]
     => [C-4 D-4 E-4]
 
-will start playing the sequence +[C-4 D-4 E-4]+ on MIDI channel 1 (us 'puter 
+will start playing the sequence <tt>[C-4 D-4 E-4]</tt> on MIDI channel 1 (us 'puter 
 programmers start counting at 0).
 
 Likewise,
@@ -126,8 +126,9 @@ will play a C major chord on channel 2.
 Yup, I fooled you.  That's all I've implemented so far.  If you're totally 
 stoked about Clef, you can contribute in one or two of two ways:
 
-*ONE:*  Play with it and report issues!
-*TWO:*  Contact me with pull requests of your _totally stellar_ features!
+* <b>ONE:</b>  Play with it and report issues!
+
+* <b>TWO:</b>  Contact me with pull requests of your _totally stellar_ features!
 
 == Special Thanks!
 
