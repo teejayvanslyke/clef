@@ -12,6 +12,10 @@ module Clef
         raise "implement me"
       end
 
+      def call(function)
+        function.execute(self)
+      end
+
     end
 
   end
