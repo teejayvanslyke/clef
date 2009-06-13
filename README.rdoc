@@ -139,7 +139,7 @@ current working directory with the extension <tt>.clef</tt>:
     -- Include jazz/scales/pentatonic.clef
 
     $>> include jazz.scales.pentatonic
-    => Loaded <jazz.scales.pentatonic
+    => Loaded <jazz.scales.pentatonic>
 
 == Oh snap!  It's experimental?!
 
