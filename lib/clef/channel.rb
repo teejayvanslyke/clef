@@ -20,7 +20,6 @@ module Clef
     end
 
     def schedule(environment)
-      puts "Scheduling channel #{self.to_i} on #{environment}"
       @expression.each_with_index do |playable, time|
         if Harmony === playable
           playable.each do |note|
@@ -28,6 +27,7 @@ module Clef
           end
         else
           environment.schedule_note_on(time, playable.to_i, self.to_i, 127)
+          environment.schedule_note_off(time+0.5, playable.to_i, self.to_i, 127)
         end
       end
     end

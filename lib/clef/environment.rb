@@ -26,6 +26,10 @@ module Clef
       @scheduler.at(@time + time) { @midi.note_on(pitch,channel,velocity) }
     end
 
+    def schedule_note_off(time, pitch, channel, velocity)
+      @scheduler.at(@time + time) { @midi.note_off(pitch,channel,velocity) }
+    end
+
     private
 
     def initialize_channels

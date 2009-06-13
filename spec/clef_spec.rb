@@ -2,6 +2,20 @@ require 'spec_helper'
 
 describe Clef do
 
+  before :each do
+    @environment = mock(Clef::Environment)
+    @environment.stub!(:channels).and_return({})
+    @environment.stub!(:play)
+
+    Clef.stub!(:environment).and_return(@environment)
+  end
+
+  describe '- When parsing' do
+    it 'should allow whitespace padding' do
+      Clef.evaluate('  [C-4   ]').should be_instance_of(Clef::Sequence)
+    end
+  end
+
   describe '- When evaluating a sequence of notes' do
     
     def do_evaluate
@@ -20,6 +34,11 @@ describe Clef do
       %w(C-4 C#4 D-4 E-4).each_with_index do |note, index|
         do_evaluate[index].to_s.should == note
       end
+    end
+
+    it 'should allow empty sequences' do
+      Clef.evaluate('[]').should be_instance_of(Clef::Sequence)
+      Clef.evaluate('[ ]').should be_instance_of(Clef::Sequence)
     end
 
   end
@@ -218,6 +237,7 @@ describe Clef do
   describe '- When assigning sequences to channels' do
 
     it 'should behave just like a sequence' do
+      pending
       Clef.evaluate('@1 = [C-3 D-3 E-3]')
       Clef.evaluate('@1').to_s.should == '[C-3 D-3 E-3]'
     end

@@ -33,7 +33,7 @@ module Clef
   end
 
   def self.evaluate(expr)
-    self.parse(expr).andand.evaluate(self.environment)
+    self.parse(expr.strip).andand.evaluate(self.environment)
   end
 
   def self.last_failure

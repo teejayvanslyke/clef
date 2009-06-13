@@ -91,7 +91,7 @@ grammar Clef
   end
 
   rule sequence
-    '[' playables ']' {
+    '[' space playables space ']' {
       def evaluate(env)
         Clef::Sequence.new(playables.evaluate(env))
       end
@@ -181,10 +181,17 @@ grammar Clef
     }
     /
     playable
+    /
+    '' {
+      def evaluate(env)
+        [ ]
+      end
+    }
   end
 
   rule channel_number
-    '0' / '1' / '2' / '3' / '4' / '5' / '6' / '7' / '8' / '9' / '10' / '11' / '12' / '13' / '14' / '15'
+    '10' / '11' / '12' / '13' / '14' / '15' /
+    '0' / '1' / '2' / '3' / '4' / '5' / '6' / '7' / '8' / '9' 
   end
 
   rule channel
