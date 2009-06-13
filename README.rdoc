@@ -19,6 +19,43 @@ in one terminal window, and
 
 in another!  
 
+== Like Rockband, but requiring slightly more talent™
+
+The most atomic unit of operation in Clef is a note.  Notes are represented 
+by the regular expression +[A-Ga-g][\-\#][0-9]+, but that's gosh darned confusing.  How about some examples?
+
+    C-4
+    C#4
+    D-4
+    D#4
+    E-4
+    F-4
+    F#4
+    G-4
+    G#4
+    A-4
+    A#4
+    B-4
+
+    et cetera
+
+There are no flats in Clef.  Who needs 'em?  
+
+A note alone is boring.  That's why Clef's main unit of operation is the _sequence_.  Sequences are 
+strings of notes -- it's like a party!
+
+    [E-4 D-4 C-4 D-4 C-4 C-4 C-4]
+
+Sequences are surrounded by square brackets (+[]+) with notes delimited by spaces.
+
+But not everyone plays the flute.  It'd be swell if we could live in _harmony_!  
+That's what _arrangements_ are for!
+
+    [(E-4 C-3) D-4 C-4 D-4 (C-4 C-3) (C-4 C-3) (C-4 C-3)]
+
+_Arrangements_ are sequences in which multiple notes are played simultaneously.  
+
+How exciting!
 
 == Special Thanks!
 
