@@ -1,6 +1,23 @@
 = clef
+=== An Interactive Music Experience Beyond Your Wildest Imagination!
+===  By Mister Teejay VanSlyke!
 
-Description goes here.
+== Getting Started!
+
+Clef is an interactive music programming language.  To install, type 
+
+    sudo gem install teejayvanslyke-clef  # that's me!
+
+Clef is a client-server application.  Ooooh.  It's so fancy.  That means 
+you'll want to type
+
+    clef_server
+
+in one terminal window, and
+
+    clef
+
+in another!  
 
 == Copyright
 
