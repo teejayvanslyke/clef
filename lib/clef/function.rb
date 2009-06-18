@@ -4,3 +4,4 @@ $:.unshift(File.dirname(__FILE__)) unless
 require 'function/base'
 require 'function/include'
 require 'function/reverse'
+require 'function/chordify'
