@@ -2,6 +2,9 @@ module Clef
 
   module Function
 
+    class InvalidArgumentError          < Exception; end
+    class InvalidNumberOfArgumentsError < Exception; end
+
     class Base
 
       def self.parse(keyword)
