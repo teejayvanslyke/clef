@@ -239,16 +239,4 @@ describe Clef do
 
   end
 
-  describe '- When including source files' do
-    it 'should parse the include command' do
-      Clef.evaluate('include(examples.mary)').should == 'Loaded <examples.mary>'
-    end
-
-    it 'should include the given source file within the environment' do
-      Clef.evaluate('include(examples.mary)')
-      Clef.evaluate('@1').to_s.should == '[E-4 D-4 C-4 D-4 E-4 E-4 E-4 E-4 D-4 C-4 D-4 E-4 E-4 E-4 E-4 D-4]'
-    end
-  end
-
-
 end

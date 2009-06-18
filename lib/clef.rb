@@ -17,6 +17,7 @@ Treetop.load File.dirname(__FILE__) + '/clef'
 require 'core_ext/fixnum'
 
 require 'clef/utils'
+require 'clef/module'
 require 'clef/note'
 require 'clef/rest'
 require 'clef/harmony'

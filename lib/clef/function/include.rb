@@ -9,14 +9,12 @@ module Clef
           return help
         end
 
-        filename = File.join(*args.first.split('.'))+'.clef'
-
-        file     = File.open(filename)
-        file.each_line do |line|
-          Clef.evaluate(line)
+        begin
+          Module.load(args.first)
+          return "Loaded <#{args.first}>"
+        rescue Clef::NoSuchModuleError
+          return "No such module: <foo.bar>"
         end
-
-        return "Loaded <#{args.first}>"
       end
 
       def help

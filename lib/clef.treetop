@@ -25,11 +25,7 @@ grammar Clef
   end
 
   rule module
-    [a-z\.]+ {
-      def evaluate(env)
-        text_value
-      end
-    }
+    [a-z\.]+ <Clef::Module>
   end
 
   rule arguments
