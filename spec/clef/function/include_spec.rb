@@ -16,7 +16,7 @@ describe '- When including source files' do
   end
 
   it 'should complain if the module cannot be found' do
-    Clef.evaluate('include(foo.bar)').should == 'No such module: <foo.bar>'
+    lambda { Clef.evaluate('include(foo.bar)') }.should raise_error(Clef::NoSuchModuleError)
   end
 
 end

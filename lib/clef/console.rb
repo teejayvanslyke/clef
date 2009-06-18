@@ -17,7 +17,7 @@ module Clef
 
           if line.nil?
             puts "\nExiting..."
-            exit
+            return
           end
 
           Readline::HISTORY.push(line)
@@ -29,8 +29,8 @@ module Clef
           else
             puts "=> #{result.to_s}"
           end
-        rescue => e
-          puts "There was a system error:  #{e}"
+        rescue Exception => e
+          puts "#{e}"
         end
       end
 

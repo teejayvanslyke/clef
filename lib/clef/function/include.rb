@@ -9,12 +9,8 @@ module Clef
           return help
         end
 
-        begin
-          Module.load(args.first)
-          return "Loaded <#{args.first}>"
-        rescue Clef::NoSuchModuleError
-          return "No such module: <foo.bar>"
-        end
+        args.first.load
+        return "Loaded #{args.first}"
       end
 
       def help
