@@ -1,12 +1,44 @@
 module Clef
 
-  class Sequence < Array
+  class Sequence 
 
+    include Enumerable
     include Clef::Utils
 
     def initialize(elements)
-      elements = [ elements ] unless elements.is_a?(Array)
-      super(elements)
+      if elements.is_a?(Array)
+        @elements = elements
+      else
+        @elements = [ elements ]
+      end
+    end
+
+    def size
+      @elements.size
+    end
+
+    def length 
+      @elements.length
+    end
+
+    def [](index)
+      @elements[index]
+    end
+
+    def []=(index, rhs)
+      @elements[index] = rhs
+    end
+
+    def *(rhs)
+      Sequence.new(@elements * rhs)
+    end
+
+    def reverse
+      Sequence.new(@elements.reverse)
+    end
+
+    def each
+      @elements.each {|e| yield e}
     end
 
     def +(rhs)

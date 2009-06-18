@@ -5,7 +5,7 @@ grammar Clef
   end
 
   rule function
-    keyword space arguments {
+    keyword '(' space arguments space ')' {
       def evaluate(env)
         keyword.evaluate(env).execute(*arguments.evaluate(env))
       end
@@ -21,6 +21,10 @@ grammar Clef
   end
 
   rule argument
+    primary
+  end
+
+  rule module
     [a-z\.]+ {
       def evaluate(env)
         text_value
@@ -114,12 +118,6 @@ grammar Clef
         a & b
       end
     }
-    /
-    '->' {
-      def apply(a, b)
-        a.call(b)
-      end
-    }
   end
 
   rule primary
@@ -129,13 +127,15 @@ grammar Clef
     /
     channel
     /
+    function
+    /
+    module
+    /
     '(' space expression space ')' { 
       def evaluate(env)
         expression.evaluate(env)
       end
     }
-    /
-    keyword
   end
 
   rule sequence
