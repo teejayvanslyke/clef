@@ -232,9 +232,9 @@ describe Clef do
 
   describe '- When assigning sequences to channels' do
 
-    it 'should behave just like a sequence' do
+    it 'should fit itself to the number of ticks within the environment period' do
       Clef.evaluate('@1 = [C-3 D-3 E-3]')
-      Clef.evaluate('@1').to_s.should == '[C-3 D-3 E-3]'
+      Clef.evaluate('@1').to_s.should == '[C-3 D-3 E-3 C-3 D-3 E-3 C-3 D-3 E-3 C-3 D-3 E-3 C-3 D-3 E-3 C-3]'
     end
 
   end
@@ -246,7 +246,7 @@ describe Clef do
 
     it 'should include the given source file within the environment' do
       Clef.evaluate('include(examples.mary)')
-      Clef.evaluate('@1').to_s.should == '[E-4 D-4 C-4 D-4 E-4 E-4 E-4]'
+      Clef.evaluate('@1').to_s.should == '[E-4 D-4 C-4 D-4 E-4 E-4 E-4 E-4 D-4 C-4 D-4 E-4 E-4 E-4 E-4 D-4]'
     end
   end
 

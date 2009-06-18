@@ -19,6 +19,10 @@ module Clef
       @scheduler.tempo = tempo
     end
 
+    def tempo
+      @scheduler.tempo
+    end
+
     def play(channel, expression)
       channels[channel].play(expression)
     end
@@ -50,7 +54,7 @@ module Clef
       @midi.control_change(32, 10, 1)
       @midi.program_change(10, 26)
 
-      @scheduler = Gamelan::Scheduler.new({:tempo => 180})
+      @scheduler = Gamelan::Scheduler.new
     end
 
     def schedule_events

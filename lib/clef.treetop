@@ -13,7 +13,7 @@ grammar Clef
   end
 
   rule keyword
-    ('include' / 'reverse' / 'chordify') {
+    ('include' / 'reverse' / 'chordify' / 'tempo') {
       def evaluate(env) 
         Clef::Function::Base.parse(text_value)
       end
