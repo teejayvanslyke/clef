@@ -49,7 +49,7 @@ module Clef
       @period = 16
 
       @midi = MIDIator::Interface.new
-      @midi.use(:dls_synth)
+      @midi.autodetect_driver
 
       @midi.control_change(32, 10, 1)
       @midi.program_change(10, 26)
