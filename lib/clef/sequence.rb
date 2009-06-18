@@ -64,6 +64,23 @@ module Clef
       Sequence.new(result)
     end
 
+    def fit(period)
+      if period > @elements.size
+        result = []
+        while result.size < period
+          @elements.each do |element|
+            result << element
+            break if result.size >= period
+          end
+        end
+        return Clef::Sequence.new(result)
+      elsif period < @elements.size
+        return Clef::Sequence.new(@elements[0..period-1])
+      else
+        return self.clone
+      end
+    end
+
     def call(function)
       function.execute(self)
     end

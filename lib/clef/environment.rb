@@ -3,6 +3,7 @@ module Clef
   class Environment
 
     attr_reader :channels
+    attr_reader :period
 
     def initialize
       initialize_channels
@@ -40,8 +41,8 @@ module Clef
     def initialize_midi
       @events   = {}
 
-      @time  = 0
-      @beats = 16
+      @time   = 0
+      @period = 16
 
       @midi = MIDIator::Interface.new
       @midi.use(:dls_synth)
@@ -57,7 +58,7 @@ module Clef
         channel.schedule(self)
       end
 
-      @time = @time + @beats
+      @time = @time + @period
 
       @scheduler.at(@time) do
         schedule_events

@@ -57,7 +57,7 @@ grammar Clef
     space '=' space
     expression {
       def evaluate(env)
-        env.play(channel.evaluate(env).to_i, expression.evaluate(env))
+        env.play(channel.evaluate(env).to_i, expression.evaluate(env).fit(env.period))
       end
     }
   end
